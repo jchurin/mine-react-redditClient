@@ -3,9 +3,7 @@ import './App.css';
 import HomePage from './app/view/pages/home';
 
 function App() {
-  return (
-    <HomePage />
-  );
+  return <HomePage />;
 }
 
 export default App;

@@ -1,5 +1,5 @@
-import React from 'react'
+import React from 'react';
 
-const RCButton = () => <button>I'm a button!</button>
+const RCButton = () => <button type="button">Im a button!</button>;
 
-export { RCButton }
+export { RCButton };

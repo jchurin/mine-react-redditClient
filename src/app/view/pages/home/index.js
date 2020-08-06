@@ -2,9 +2,9 @@ import React from 'react';
 import { RCButton } from '@rcshared';
 
 const HomePage = () => (
-    <>
-        <RCButton />
-    </>
+  <>
+    <RCButton />
+  </>
 );
 
 export default HomePage;
