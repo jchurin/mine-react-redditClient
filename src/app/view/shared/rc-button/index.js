@@ -1,5 +1,10 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 
-const RCButton = () => <button type="button">Im a button!</button>;
+const RCButton = () => (
+  <Button variant="contained" color="primary">
+    Im a button!
+  </Button>
+);
 
 export { RCButton };
