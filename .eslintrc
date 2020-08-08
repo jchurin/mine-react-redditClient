@@ -32,7 +32,7 @@
       }
     ],
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
+    // "react-hooks/exhaustive-deps": "warn",
     "no-console": "off",
     "import/prefer-default-export": "off",
     "import/no-unresolved": "off",
@@ -40,6 +40,7 @@
     "react/require-default-props": "off",
     "react/forbid-prop-types": "off",
     "react/jsx-props-no-spreading": "off",
+    "react-hooks/exhaustive-deps": "off",
     "prettier/prettier": ["error"]
   },
   "globals": {

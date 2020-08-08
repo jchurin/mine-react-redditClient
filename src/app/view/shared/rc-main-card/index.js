@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RCMainCard = ({ post }) => {
+const RCMainCard = ({ post = {} }) => {
   const classes = useStyles();
 
   return (
