@@ -68,6 +68,9 @@ const entryListReducer = (state = defaultState, { type, payload }) =>
         break;
       }
       case CHANGE_ROWS_PER_PAGE: {
+        draft.pagination.page = 0;
+        draft.pagination.after = null;
+        draft.pagination.before = null;
         draft.pagination.rowsPerPage = payload.rowsPerPage;
         break;
       }
