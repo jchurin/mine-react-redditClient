@@ -29,7 +29,7 @@ const HomePage = () => {
             mountOnEnter
             unmountOnExit
             component={() => (
-              <Grid item>
+              <Grid item md={6}>
                 <EntryDetails />
               </Grid>
             )}

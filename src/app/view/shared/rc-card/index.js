@@ -37,7 +37,7 @@ const RCCard = ({ post, callbacks }) => {
     callbacks.onClickDismiss(post.id);
   };
   const onClickThumbnail = () => {
-    callbacks.onClickThumbnail(post.image);
+    callbacks.onClickThumbnail(post.image || post.thumbnail);
   };
 
   return (
