@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const mapEntryList = (list) => {
   return list.map(({ data: entry }) => ({
     id: entry.id,
@@ -5,8 +7,18 @@ export const mapEntryList = (list) => {
     author: entry.author,
     created: entry.created,
     image: entry.thumbnail,
-    comments: entry.comments,
+    comments: entry.num_comments,
     visited: entry.visited,
     hidden: entry.hidden,
   }));
+};
+
+export const getFromNowByDate = (timestamp) =>
+  moment(timestamp * 1000).fromNow();
+
+export const getFormatedComments = (comments) => {
+  if (comments > 1000) {
+    return `${(comments / 1000).toFixed(0)}K`;
+  }
+  return comments;
 };

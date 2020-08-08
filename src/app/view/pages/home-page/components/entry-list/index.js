@@ -1,17 +1,20 @@
 import React, { useEffect } from 'react';
 
-import { RCMainCard, RCCard, RCDivider, RCLoading } from '@rc-shared';
+import { RCCard, RCLoading } from '@rc-shared';
 import Grid from '@material-ui/core/Grid';
 import { injectSaga } from '@rc-redux';
 import { useDispatch, useSelector } from 'react-redux';
-import { KEY_ENTRY_DETAILS, KEY_ENTRY_LIST } from '@rc-constants';
+import { KEY_ENTRY_LIST } from '@rc-constants';
+import PropTypes from 'prop-types';
 
-import { Container } from '@material-ui/core';
 import saga from './sideeffect';
+import sagaDetails from '../entry-details/sideeffect';
 import actions from './action';
+import { KEY_ENTRY_DETAILS } from '../../../../../data/constants';
 
 const EntryList = ({ posts }) => {
-  injectSaga(KEY_ENTRY_DETAILS, saga);
+  injectSaga(KEY_ENTRY_LIST, saga);
+  injectSaga(KEY_ENTRY_DETAILS, sagaDetails);
 
   const dispatch = useDispatch();
 
@@ -21,36 +24,47 @@ const EntryList = ({ posts }) => {
     dispatch(actions.fetchEntryList());
   }, []);
 
-  const renderLoading = () => (
-    <Container spacing={4}>
-      <RCLoading />
-    </Container>
-  );
+  const onClickCard = (entryId) => {
+    dispatch(actions.openEntryDetails(entryId));
+  };
+  const onClickDismiss = (entryId) => {
+    dispatch(actions.setEntryHidden(entryId));
+  };
+  const onClickThumbnail = (entryId) => {
+    console.log(entryId);
+  };
+
+  const renderLoading = () => <RCLoading />;
 
   const renderData = () => {
     return (
       <>
-        <RCMainCard post={posts[0]} />
-        <Grid container spacing={4}>
-          {posts.slice(1, 3).map((post) => (
-            <Grid item xs={12} md={6} key={post.title}>
-              <RCCard post={post} />
-            </Grid>
-          ))}
-        </Grid>
-        <RCDivider />
         <Grid container spacing={2}>
-          {posts.slice(3).map((post) => (
-            <Grid item xs={12} md={12} key={post.title}>
-              <RCCard key={post.title} post={post} />
-            </Grid>
-          ))}
+          {posts.map(
+            (post) =>
+              !post.hidden && (
+                <Grid item xs={12} md={12} key={post.id}>
+                  <RCCard
+                    post={post}
+                    callbacks={{
+                      onClickCard,
+                      onClickDismiss,
+                      onClickThumbnail,
+                    }}
+                  />
+                </Grid>
+              )
+          )}
         </Grid>
       </>
     );
   };
 
   return loading ? renderLoading() : renderData();
+};
+
+EntryList.propTypes = {
+  posts: PropTypes.array,
 };
 
 export default EntryList;

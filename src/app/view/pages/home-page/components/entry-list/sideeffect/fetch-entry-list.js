@@ -1,16 +1,27 @@
-import { put, takeLatest, call } from 'redux-saga/effects';
+import { put, takeLatest, call, select } from 'redux-saga/effects';
 import api from '@rc-api';
 import actions, { FETCH_ENTRY_LIST } from '../action';
 import { mapEntryList } from '../../../../../../data/utils';
 
-export function* fetchEntryList() {
+export const getPagination = (state) => state.entryList?.pagination || [];
+
+export function* fetchEntryList({ payload: { pointer } }) {
   try {
     yield put(actions.toggleLoadingData());
-    const entryList = yield call(api.fetchEntryList);
-    const mappedList = mapEntryList(entryList.data.children);
-    // eslint-disable-next-line no-debugger
-    debugger;
+    const paginationData = yield select(getPagination);
+    const payload = {
+      limit: paginationData.rowsPerPage,
+      count: paginationData.rowsPerPage,
+      before: pointer === 'before' ? paginationData.before : null,
+      after: pointer === 'after' ? paginationData.after : null,
+    };
+    const {
+      data: { children, before, after },
+    } = yield call(api.fetchEntryList, payload);
+    const mappedList = mapEntryList(children);
     yield put(actions.fetchEntryListSuccess(mappedList));
+    yield put(actions.setOriginalList(children));
+    yield put(actions.setPaginationData({ before, after }));
   } catch (err) {
     yield put(actions.fetchEntryListFail(err));
   } finally {

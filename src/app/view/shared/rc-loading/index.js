@@ -1,15 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { Container, Grid } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
-  root: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  wrapper: {
-    position: 'relative',
-  },
+  root: {},
+  wrapper: {},
 }));
 
 const RCLoading = () => {
@@ -17,7 +13,18 @@ const RCLoading = () => {
 
   return (
     <div className={classes.root}>
-      <CircularProgress className={classes.wrapper} />
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: '50vh' }}
+      >
+        <Grid item md={3} xs={3}>
+          <CircularProgress className={classes.wrapper} />
+        </Grid>
+      </Grid>
     </div>
   );
 };

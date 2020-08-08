@@ -1,34 +1,33 @@
-import _ from 'lodash';
-import ACTIONS from './action';
+/* eslint-disable default-case, no-param-reassign */
+import produce from 'immer';
+import {
+  FETCH_ENTRY_DETAILS_SUCCESS,
+  FETCH_ENTRY_DETAILS_FAIL,
+  TOGGLE_LOADING,
+} from './action';
 
 const defaultState = {
   loading: false,
-  details: {},
-  hasError: false,
+  details: null,
+  error: null,
 };
 
-const entryListReducer = (state = defaultState, action) => {
-  switch (action.type) {
-    case ACTIONS.Types.CREATE_ITEM: {
-      console.log(action);
-
-      const item = action.payload;
-      const newItem = { id: state.items.length + 1, description: item };
-      const newState = _.cloneDeep(state);
-      newState.items.push(newItem);
-      return newState;
+const entryDetailsReducer = (state = defaultState, { type, payload }) =>
+  produce(state, (draft) => {
+    switch (type) {
+      case FETCH_ENTRY_DETAILS_SUCCESS: {
+        draft.details = payload.entryDetails;
+        break;
+      }
+      case FETCH_ENTRY_DETAILS_FAIL: {
+        draft.error = payload.error;
+        break;
+      }
+      case TOGGLE_LOADING: {
+        draft.loading = !state.loading;
+        break;
+      }
     }
+  });
 
-    case ACTIONS.Types.DELETE_ITEM: {
-      const newState = _.cloneDeep(state);
-      const index = _.findIndex(newState.items, { id: action.payload });
-      newState.items.splice(index, 1);
-      return newState;
-    }
-
-    default:
-      return state;
-  }
-};
-
-export default entryListReducer;
+export default entryDetailsReducer;
