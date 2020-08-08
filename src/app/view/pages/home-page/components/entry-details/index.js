@@ -4,7 +4,7 @@ import { RCLoading } from '@rc-shared';
 import { useSelector } from 'react-redux';
 import { KEY_ENTRY_DETAILS } from '@rc-constants';
 
-import { Container } from '@material-ui/core';
+import { Container, Grid } from '@material-ui/core';
 
 const EntryDetails = () => {
   const { loading, details } = useSelector(
@@ -20,7 +20,7 @@ const EntryDetails = () => {
   const renderData = () => {
     const { title } = details;
 
-    return <>{title}</>;
+    return <Grid container>{title}</Grid>;
   };
 
   return loading ? renderLoading() : renderData();

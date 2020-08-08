@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { KEY_ENTRY_LIST } from '@rc-constants';
 import PropTypes from 'prop-types';
 
+import Slide from '@material-ui/core/Slide';
 import saga from './sideeffect';
 import sagaDetails from '../entry-details/sideeffect';
 import actions from './action';
@@ -40,21 +41,25 @@ const EntryList = ({ posts }) => {
     return (
       <>
         <Grid container spacing={2}>
-          {posts.map(
-            (post) =>
-              !post.hidden && (
-                <Grid item xs={12} md={12} key={post.id}>
-                  <RCCard
-                    post={post}
-                    callbacks={{
-                      onClickCard,
-                      onClickDismiss,
-                      onClickThumbnail,
-                    }}
-                  />
-                </Grid>
-              )
-          )}
+          {posts.map((post) => (
+            <Slide
+              in={!post.hidden}
+              key={post.id}
+              direction="right"
+              unmountOnExit
+            >
+              <Grid item xs={12} md={12}>
+                <RCCard
+                  post={post}
+                  callbacks={{
+                    onClickCard,
+                    onClickDismiss,
+                    onClickThumbnail,
+                  }}
+                />
+              </Grid>
+            </Slide>
+          ))}
         </Grid>
       </>
     );

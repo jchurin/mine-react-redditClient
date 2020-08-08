@@ -3,6 +3,7 @@ import { injectReducer } from '@rc-redux';
 import { Grid } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { KEY_ENTRY_LIST, KEY_ENTRY_DETAILS } from '@rc-constants';
+import Collapse from '@material-ui/core/Collapse';
 import entryListReducer from './components/entry-list/reducer';
 import entryDetailsReducer from './components/entry-details/reducer';
 import EntryList from './components/entry-list';
@@ -23,7 +24,9 @@ const HomePage = () => {
         </Grid>
         {details && (
           <Grid item>
-            <EntryDetails />
+            <Collapse in={details} collapsedHeight={0}>
+              <EntryDetails />
+            </Collapse>
           </Grid>
         )}
       </Grid>
