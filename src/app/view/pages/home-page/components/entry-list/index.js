@@ -4,7 +4,7 @@ import { RCCard, RCLoading } from '@rc-shared';
 import Grid from '@material-ui/core/Grid';
 import { injectSaga } from '@rc-redux';
 import { useDispatch, useSelector } from 'react-redux';
-import { KEY_ENTRY_LIST } from '@rc-constants';
+import { KEY_ENTRY_LIST, KEY_ENTRY_DETAILS } from '@rc-constants';
 import PropTypes from 'prop-types';
 
 import Slide from '@material-ui/core/Slide';
@@ -12,7 +12,6 @@ import ReactBnbGallery from 'react-bnb-gallery';
 import saga from './sideeffect';
 import sagaDetails from '../entry-details/sideeffect';
 import actions from './action';
-import { KEY_ENTRY_DETAILS } from '../../../../../data/constants';
 
 import 'react-bnb-gallery/dist/style.css';
 

@@ -10,11 +10,10 @@ import Container from '@material-ui/core/Container';
 import { useSelector, useDispatch } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import { KEY_ENTRY_DETAILS } from '@rc-constants';
+import { KEY_ENTRY_DETAILS, KEY_ENTRY_LIST } from '@rc-constants';
 import HomePage from '../home-page';
 
 import entryListActions from '../home-page/components/entry-list/action';
-import { KEY_ENTRY_LIST } from '../../../data/constants';
 
 const ContainerPage = () => {
   const dispatch = useDispatch();
