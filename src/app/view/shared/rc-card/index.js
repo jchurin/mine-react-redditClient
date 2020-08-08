@@ -37,7 +37,7 @@ const RCCard = ({ post, callbacks }) => {
     callbacks.onClickDismiss(post.id);
   };
   const onClickThumbnail = () => {
-    callbacks.onClickThumbnail(post.id);
+    callbacks.onClickThumbnail(post.image);
   };
 
   return (
@@ -82,16 +82,6 @@ const RCCard = ({ post, callbacks }) => {
                     </Typography>
                   </Grid>
                 </Grid>
-                {/* <Grid item xs={12} md={12}>
-                  <IconButton
-                    color="secondary"
-                    aria-label="Dismiss"
-                    component="span"
-                    onClick={onClickDismiss}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </Grid> */}
               </Grid>
             </Grid>
           </CardContent>
@@ -99,7 +89,7 @@ const RCCard = ({ post, callbacks }) => {
         <Hidden xsDown>
           <CardMedia
             className={classes.cardMedia}
-            image={post.image}
+            image={post.thumbnail}
             title={post.title}
             onClick={onClickThumbnail}
           />

@@ -11,6 +11,8 @@ import {
   CHANGE_ROWS_PER_PAGE,
   CHANGE_PAGE,
   SET_PAGINATION_DATA,
+  TOGGLE_IMAGE_GALLERY,
+  SET_IMAGE_GALLERY,
 } from './action';
 
 const defaultState = {
@@ -24,6 +26,10 @@ const defaultState = {
     rowsPerPage: 10,
     after: null,
     before: null,
+  },
+  imageGallery: {
+    open: false,
+    image: null,
   },
 };
 
@@ -81,6 +87,14 @@ const entryListReducer = (state = defaultState, { type, payload }) =>
       case SET_PAGINATION_DATA: {
         draft.pagination.before = payload.pagination.before;
         draft.pagination.after = payload.pagination.after;
+        break;
+      }
+      case SET_IMAGE_GALLERY: {
+        draft.imageGallery.image = payload.image;
+        break;
+      }
+      case TOGGLE_IMAGE_GALLERY: {
+        draft.imageGallery.open = !state.imageGallery.open;
         break;
       }
     }

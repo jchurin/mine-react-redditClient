@@ -10,6 +10,8 @@ export const HIDDEN_LIST = 'entryList/hidden-list';
 export const CHANGE_ROWS_PER_PAGE = 'entryList/change-rows-per-page';
 export const CHANGE_PAGE = 'entryList/change-page';
 export const SET_PAGINATION_DATA = 'entryList/set-pagination-data';
+export const TOGGLE_IMAGE_GALLERY = 'entryList/toggle-image-gallery';
+export const SET_IMAGE_GALLERY = 'entryList/set-image-gallery';
 
 export default {
   fetchEntryList: (pointer) => ({
@@ -57,5 +59,12 @@ export default {
   setPaginationData: (pagination) => ({
     type: SET_PAGINATION_DATA,
     payload: { pagination },
+  }),
+  setImageGallery: (image) => ({
+    type: SET_IMAGE_GALLERY,
+    payload: { image },
+  }),
+  toggleImageGallery: () => ({
+    type: TOGGLE_IMAGE_GALLERY,
   }),
 };

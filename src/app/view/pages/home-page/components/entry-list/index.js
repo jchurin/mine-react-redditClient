@@ -8,10 +8,13 @@ import { KEY_ENTRY_LIST } from '@rc-constants';
 import PropTypes from 'prop-types';
 
 import Slide from '@material-ui/core/Slide';
+import ReactBnbGallery from 'react-bnb-gallery';
 import saga from './sideeffect';
 import sagaDetails from '../entry-details/sideeffect';
 import actions from './action';
 import { KEY_ENTRY_DETAILS } from '../../../../../data/constants';
+
+import 'react-bnb-gallery/dist/style.css';
 
 const EntryList = ({ posts }) => {
   injectSaga(KEY_ENTRY_LIST, saga);
@@ -19,7 +22,9 @@ const EntryList = ({ posts }) => {
 
   const dispatch = useDispatch();
 
-  const loading = useSelector((state) => state[KEY_ENTRY_LIST] || {})?.loading;
+  const { loading, imageGallery } = useSelector(
+    (state) => state[KEY_ENTRY_LIST] || {}
+  );
 
   useEffect(() => {
     dispatch(actions.fetchEntryList());
@@ -31,8 +36,13 @@ const EntryList = ({ posts }) => {
   const onClickDismiss = (entryId) => {
     dispatch(actions.setEntryHidden(entryId));
   };
-  const onClickThumbnail = (entryId) => {
-    console.log(entryId);
+  const onClickThumbnail = (entryImage) => {
+    dispatch(actions.setImageGallery(entryImage));
+    dispatch(actions.toggleImageGallery());
+  };
+
+  const toggleGallery = () => {
+    dispatch(actions.toggleImageGallery());
   };
 
   const renderLoading = () => <RCLoading />;
@@ -61,6 +71,14 @@ const EntryList = ({ posts }) => {
             </Slide>
           ))}
         </Grid>
+
+        <ReactBnbGallery
+          show={imageGallery.open}
+          photos={[
+            { photo: imageGallery.image, thumbnail: imageGallery.image },
+          ]}
+          onClose={toggleGallery}
+        />
       </>
     );
   };
