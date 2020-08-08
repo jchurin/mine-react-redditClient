@@ -4,6 +4,7 @@ import {
   FETCH_ENTRY_DETAILS_SUCCESS,
   FETCH_ENTRY_DETAILS_FAIL,
   TOGGLE_LOADING,
+  REMOVE_DETAILS,
 } from './action';
 
 const defaultState = {
@@ -25,6 +26,10 @@ const entryDetailsReducer = (state = defaultState, { type, payload }) =>
       }
       case TOGGLE_LOADING: {
         draft.loading = !state.loading;
+        break;
+      }
+      case REMOVE_DETAILS: {
+        draft.details = null;
         break;
       }
     }

@@ -3,6 +3,7 @@ export const FETCH_ENTRY_DETAILS_SUCCESS =
   'entryDetails/fetch-entry-details-success';
 export const FETCH_ENTRY_DETAILS_FAIL = 'entryDetails/fetch-entry-details-fail';
 export const TOGGLE_LOADING = 'entryDetails/toggle-loading';
+export const REMOVE_DETAILS = 'entryDetails/remove-details';
 
 export default {
   fetchEntryDetails: (entryDetails) => ({
@@ -19,5 +20,8 @@ export default {
   }),
   toggleLoadingData: () => ({
     type: TOGGLE_LOADING,
+  }),
+  removeDetails: () => ({
+    type: REMOVE_DETAILS,
   }),
 };

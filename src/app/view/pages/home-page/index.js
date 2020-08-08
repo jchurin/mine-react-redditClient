@@ -13,8 +13,8 @@ const HomePage = () => {
   injectReducer(KEY_ENTRY_LIST, entryListReducer);
   injectReducer(KEY_ENTRY_DETAILS, entryDetailsReducer);
 
-  const list = useSelector((state) => state[KEY_ENTRY_LIST] || {})?.list;
-  const details = useSelector((state) => state[KEY_ENTRY_DETAILS])?.details;
+  const { list } = useSelector((state) => state[KEY_ENTRY_LIST] || {});
+  const { details } = useSelector((state) => state[KEY_ENTRY_DETAILS]);
 
   return (
     <>
@@ -23,11 +23,17 @@ const HomePage = () => {
           <EntryList posts={list} />
         </Grid>
         {details && (
-          <Grid item>
-            <Collapse in={details} collapsedHeight={0}>
-              <EntryDetails />
-            </Collapse>
-          </Grid>
+          <Collapse
+            in={details}
+            collapsedHeight={0}
+            mountOnEnter
+            unmountOnExit
+            component={() => (
+              <Grid item>
+                <EntryDetails />
+              </Grid>
+            )}
+          />
         )}
       </Grid>
     </>
